@@ -77,24 +77,24 @@ struct FileInfo
 
 struct FileExplorer
 {
-	fs::path			current_directory;
+	fs::path			current_directory; // Dossier present
 
-	fs::path			last_directory;
+	fs::path			last_directory; // Dossier precedent
 
-	fs::path			selected_current;
+	fs::path			selected_current; // Fichier courrament selectionner
 
-	vector<FileInfo>	current_files;
+	vector<FileInfo>	current_files; // Fichier du dossier courrant qui reponde a nos critere
 
-	vector<string>		extension_filter;
+	vector<string>		extension_filter; // Les extensions de fichiers voulues
 
-	bool				is_close = true;
+	bool				is_close = true; // Indique si le file explorer est fermer
 
-	bool				get_folder = false;
+	bool				get_folder = false; // GetFolder indique qu'on desire obtenir un dossier donc on affiche juste ca
 
-	bool				waiting_data = false;
+	bool				waiting_data = false; // Pour dire que le file explorer a ete demarrer
 
 
-	void SetCurrentDirectory(fs::path path)
+	void SetCurrentDirectory(fs::path path) // Change le repertoire courrant et update les fichiers 
 	{
 		if(!fs::exists(path))
 		{
@@ -228,13 +228,13 @@ struct FileExplorer
 			ImGui::EndChild();
 			ImGui::EndGroup();
 			ImGui::Text("Selectionner : %s", fi.file.string().c_str());
-			ImGui::SameLine();
 			if(ImGui::Button("Choisir"))
 			{
 				selected_current = fi.file;
 				is_close = true;
 				ImGui::CloseCurrentPopup();
 			}
+			ImGui::SameLine();
 			if(ImGui::Button("Fermer"))
 			{
 				is_close = true;
