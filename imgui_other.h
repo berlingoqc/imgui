@@ -5,26 +5,19 @@
 #include <cstdarg>
 #include <iostream>
 
-#include <filesystem>
+#ifdef EMSCRIPTEN
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#include <vector>
 
-using namespace std;
+#else
+#include <filesystem>
 namespace fs = std::filesystem;
 
-inline void ShowErrorMessage(string titre, string message,bool* p_open = nullptr)
-{
-	if(ImGui::BeginPopupModal(titre.c_str(),p_open))
-	{
-		ImGui::Separator();
-		ImGui::Text(message.c_str());
-		ImGui::Separator();
-		if(ImGui::Button("Fermer"))
-		{
-			ImGui::CloseCurrentPopup();
-		}
-		ImGui::EndPopup();
-	}
-	
-}
+#endif
+
+using namespace std;
+
 
 struct AppLog
 {
@@ -111,7 +104,7 @@ struct FileExplorer
 		for (auto& f : fs::directory_iterator(path)) {
 			FileInfo fi;
 			fi.file = fs::path(f);
-			fi.is_folder = f.is_directory();
+			fi.is_folder = fs::is_directory(fi.file);
 			if(get_folder && fi.is_folder)
 			{
 				current_files.emplace_back(fi);
