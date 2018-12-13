@@ -102,7 +102,7 @@ bool    ImGui_ImplOpenGL3_Init(const char* glsl_version)
 #ifdef EMSCRIPTEN
     glsl_version = "#version 300 es";
 #endif
-	printf("IMGUI shader version %s", glsl_version);
+	printf("IMGUI shader version %s\n", glsl_version);
     IM_ASSERT((int)strlen(glsl_version) + 2 < IM_ARRAYSIZE(g_GlslVersionString));
     strcpy(g_GlslVersionString, glsl_version);
     strcat(g_GlslVersionString, "\n");
