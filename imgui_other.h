@@ -11,8 +11,8 @@ namespace fs = std::experimental::filesystem;
 #include <vector>
 
 #else
-#include <filesystem>
-namespace fs = std::filesystem;
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 #endif
 
@@ -134,7 +134,7 @@ struct FileExplorer
 		waiting_data = true;
 	}
 
-	void ChangeParent() // Change le répertoire courrant pour le parrent
+	void ChangeParent() // Change le rï¿½pertoire courrant pour le parrent
 	{
 		if(!current_directory.has_parent_path())
 		{
@@ -207,7 +207,7 @@ struct FileExplorer
 							SetCurrentDirectory(c);
 						} else
 						{
-							// Choisit ce fichier comme étant lui selectionner et ferme la fenetre
+							// Choisit ce fichier comme ï¿½tant lui selectionner et ferme la fenetre
 							selected_current = f.file;
 							is_close = true;
 							ImGui::CloseCurrentPopup();
