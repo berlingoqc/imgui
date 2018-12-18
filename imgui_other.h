@@ -6,13 +6,13 @@
 #include <iostream>
 
 #ifdef EMSCRIPTEN
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 #include <vector>
 
 #else
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 
 #endif
 
